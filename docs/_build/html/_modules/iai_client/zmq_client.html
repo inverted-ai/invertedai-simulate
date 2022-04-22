@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iai_client.zmq_client &#8212; iai-client 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">iai-client 1.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">iai_client.zmq_client</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for iai_client.zmq_client</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">zmq</span>
+<span class="kn">import</span> <span class="nn">flatbuffers</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">iai_common.communications.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_message_body</span><span class="p">,</span>
+    <span class="n">build_clienthandshake</span><span class="p">,</span>
+    <span class="n">build_command</span><span class="p">,</span>
+    <span class="n">build_initialize</span><span class="p">,</span>
+    <span class="n">build_step</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="ZMQClient"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ZMQClient">[docs]</a><span class="k">class</span> <span class="nc">ZMQClient</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class provides methods for establishing connections with the client</span>
+<span class="sd">    and exchanging data using flatbuffers for serialization of data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_server_address</span> <span class="o">=</span> <span class="n">server_address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REQ</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span>
+            <span class="n">zmq</span><span class="o">.</span><span class="n">LINGER</span><span class="p">,</span> <span class="mi">100</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">server_address</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;isp (Python): zmq.REP socket connected to server </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_server_address</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exception_type</span><span class="p">,</span> <span class="n">exception_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ZMQClient.close"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ZMQClient.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">term</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;isp (Python): zmq.REP socket disconnected from server </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_server_address</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ZMQClient.send_request"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ZMQClient.send_request">[docs]</a>    <span class="k">def</span> <span class="nf">send_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ZMQClient.receive_reply"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ZMQClient.receive_reply">[docs]</a>    <span class="k">def</span> <span class="nf">receive_reply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="ApiMessagingClient"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ApiMessagingClient">[docs]</a><span class="k">class</span> <span class="nc">ApiMessagingClient</span><span class="p">(</span><span class="n">ZMQClient</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The concrete class that handles handshaking and other communications to the zmq server</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">client_name</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">server_address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client_name</span> <span class="o">=</span> <span class="n">client_name</span>
+
+<div class="viewcode-block" id="ApiMessagingClient.client_handshake"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ApiMessagingClient.client_handshake">[docs]</a>    <span class="k">def</span> <span class="nf">client_handshake</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="s2">&quot; Connecting to server &quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">flatbuffers</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+        <span class="c1"># construct MessageBody</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">build_clienthandshake</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">client_name</span><span class="p">)</span>
+        <span class="c1"># construct Message</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_request</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reply</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive_reply</span><span class="p">()</span>
+            <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">server_name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span> <span class="o">=</span> <span class="n">get_message_body</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">server_name</span><span class="si">}</span><span class="s2">, with </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;isp (Python): Unexpected reply to handshake.&quot;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="ApiMessagingClient.initialize"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ApiMessagingClient.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">scenario</span><span class="p">,</span>
+        <span class="n">world_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">vehicle_physics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">scenario_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">sensors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">flatbuffers</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">build_initialize</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">scenario</span><span class="p">,</span>
+                                   <span class="n">scenario_parameters</span><span class="o">=</span><span class="n">scenario_parameters</span><span class="p">,</span>
+                                   <span class="n">world_parameters</span><span class="o">=</span><span class="n">world_parameters</span><span class="p">,</span>
+                                   <span class="n">sensors</span><span class="o">=</span><span class="n">sensors</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_request</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ApiMessagingClient.get_reply"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ApiMessagingClient.get_reply">[docs]</a>    <span class="k">def</span> <span class="nf">get_reply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive_reply</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">message_type</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">get_message_body</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">message_type</span><span class="p">,</span> <span class="n">message</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;isp (Python): Unrecognizable Reply.&quot;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="ApiMessagingClient.send_command"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ApiMessagingClient.send_command">[docs]</a>    <span class="k">def</span> <span class="nf">send_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command_text</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">flatbuffers</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">build_command</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">command_text</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_request</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ApiMessagingClient.listen"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ApiMessagingClient.listen">[docs]</a>    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive_reply</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">req</span></div>
+
+<div class="viewcode-block" id="ApiMessagingClient.send"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.zmq_client.ApiMessagingClient.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send_request</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;isp (Python): ZMQ Failed&quot;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">False</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">iai-client 1.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">iai_client.zmq_client</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, InvertedAI.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>
