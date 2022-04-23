@@ -4,6 +4,7 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 import gym
+from halo import Halo
 
 Action = Tuple[float, float]
 Obs = Dict[str, np.ndarray]
@@ -46,8 +47,11 @@ class IAIEnv(gym.Env):
         :return:
         :rtype:
         """
+        spinner = Halo(text=f'Loading: {scenario_name} scenario', spinner='dots')
+        spinner.start()
         self.remote.initialize(scenario_name, world_parameters, vehicle_physics, scenario_parameters, sensors)
         _, message = self.remote.get_reply()
+        spinner.succeed()
         return message
 
     def get_map(self):

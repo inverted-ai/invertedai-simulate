@@ -221,6 +221,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">from</span> <span class="nn">halo</span> <span class="kn">import</span> <span class="n">Halo</span>
 
 <span class="n">Action</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
 <span class="n">Obs</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
@@ -263,8 +264,11 @@
 <span class="sd">        :return:</span>
 <span class="sd">        :rtype:</span>
 <span class="sd">        """</span>
+        <span class="n">spinner</span> <span class="o">=</span> <span class="n">Halo</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s1">'Loading: </span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s1"> scenario'</span><span class="p">,</span> <span class="n">spinner</span><span class="o">=</span><span class="s1">'dots'</span><span class="p">)</span>
+        <span class="n">spinner</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">world_parameters</span><span class="p">,</span> <span class="n">vehicle_physics</span><span class="p">,</span> <span class="n">scenario_parameters</span><span class="p">,</span> <span class="n">sensors</span><span class="p">)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">get_reply</span><span class="p">()</span>
+        <span class="n">spinner</span><span class="o">.</span><span class="n">succeed</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">message</span></div>
 
 <div class="viewcode-block" id="IAIEnv.get_map"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.interface.IAIEnv.get_map">[docs]</a>    <span class="k">def</span> <span class="nf">get_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

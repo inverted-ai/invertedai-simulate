@@ -7,3 +7,4 @@ scikit-image==0.19.2
 SQLAlchemy==1.4.31
 Sphinx==4.5.0
 sphinx-rtd-theme==1.0.0
+halo==0.0.31

@@ -2,13 +2,9 @@
 
 <!-- start elevator-pitch -->
 - **Safety Validation**
-- **Synthetic Data Generation for Training Autonomous Vehicles** 
+- **Synthetic Data Generation** 
+- **Training and Testing**
 - **Real-World Results From Simulation** 
-    - Accurate Physics Simulation
-    - Photo-Realistic Scenes
-    - Accurate Sensor Data
-    - Human-Like NPCs
-
 <!-- end elevator-pitch -->
 
 
