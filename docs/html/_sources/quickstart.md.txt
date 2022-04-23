@@ -10,8 +10,8 @@
    pip install -r requirements.txt
    source .venv/bin/activate
    ```
-4. Contact us for the server ip address.
-3. Run your simulation! 🎉
+3. Contact us for the server ip address.
+4. Run your simulation! 🎉
 - For driving run:
   ```shell
    python client_app_driving.py  --zmq_server_address 'x.x.x.x:5555'
@@ -20,8 +20,13 @@
    ```shell
    python client_app_trafficlight_data.py --zmq_server_address 'x.x.x.x:5555'
    ```
+5. Jupyter-notebooks are also provided in Google Colab:
 
-<!-- ```{include} ../README.md -->
-<!-- :start-after: <\!-- start quickstart -\-> -->
-<!-- :end-before: <\!-- end quickstart -\-> -->
-<!-- ``` -->
+- For driving run:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/inverted-ai/iai-client/blob/main/examples/usr-demo-driving.ipynb)
+
+- For data generation run:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/inverted-ai/iai-client/blob/main/examples/usr-demo-datageneration.ipynb)
+
+- For data generation as a pytorch dataloader run:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/inverted-ai/iai-client/blob/main/examples/test_dataloader.ipynb)

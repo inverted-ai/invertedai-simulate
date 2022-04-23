@@ -2,8 +2,11 @@
 hide-toc: true
 ---
 
-![](images/banner.svg)
-   <!-- :align: center -->
+```{eval-rst}
+.. image:: images/banner.svg
+  :width: 600
+  :alt: Alternative text
+```
 
 # Documentation
 Breaking Down Barriers to Level 4-5 Autonomy
