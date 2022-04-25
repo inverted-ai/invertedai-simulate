@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>iai_client.utils - iai-client 1.0.0 documentation</title>
+        <title>invertedai_client.utils - invertedai-client 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
@@ -132,7 +132,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">iai-client 1.0.0 documentation</div></a>
+      <a href="../../index.html"><div class="brand">invertedai-client 1.0.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -175,9 +175,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../apireference.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../apireference.html#serialization">Serialization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../miscellaneous.html">Document Title</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/modules.html">iai_client</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../source/iai_client.html">iai_client package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../source/iai_client.dataset.html">iai_client.dataset package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../source/modules.html">invertedai_client</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../source/invertedai_client.html">invertedai_client package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/invertedai_client.dataset.html">invertedai_client.dataset package</a></li>
 </ul>
 </li>
 </ul>
@@ -214,7 +214,7 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for iai_client.utils</h1><div class="highlight"><pre>
+          <h1>Source code for invertedai_client.utils</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">skimage.draw</span> <span class="kn">import</span> <span class="n">line_aa</span>
@@ -240,12 +240,12 @@
 <span class="n">FONT_THICKNESS</span> <span class="o">=</span> <span class="mi">1</span>
 
 
-<div class="viewcode-block" id="ControllerNoiseType"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.ControllerNoiseType">[docs]</a><span class="k">class</span> <span class="nc">ControllerNoiseType</span><span class="p">:</span>
+<div class="viewcode-block" id="ControllerNoiseType"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.ControllerNoiseType">[docs]</a><span class="k">class</span> <span class="nc">ControllerNoiseType</span><span class="p">:</span>
     <span class="n">UNIFORM</span> <span class="o">=</span> <span class="s2">"uniform"</span>
     <span class="n">TEMPORAL</span> <span class="o">=</span> <span class="s2">"temporal"</span></div>
 
 
-<div class="viewcode-block" id="Res"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Res">[docs]</a><span class="k">class</span> <span class="nc">Res</span><span class="p">:</span>
+<div class="viewcode-block" id="Res"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Res">[docs]</a><span class="k">class</span> <span class="nc">Res</span><span class="p">:</span>
     <span class="sd">"""</span>
 <span class="sd">    Some commonly used resolutions.</span>
 <span class="sd">    """</span>
@@ -256,7 +256,7 @@
     <span class="n">MD</span> <span class="o">=</span> <span class="n">Resolution</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">240</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="SensorSettings"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.SensorSettings">[docs]</a><span class="k">class</span> <span class="nc">SensorSettings</span><span class="p">:</span>
+<div class="viewcode-block" id="SensorSettings"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.SensorSettings">[docs]</a><span class="k">class</span> <span class="nc">SensorSettings</span><span class="p">:</span>
     <span class="n">Available_Sensors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'camera'</span><span class="p">]</span>
     <span class="n">Available_Camera_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'rgb-camera'</span><span class="p">,</span> <span class="s1">'segmentation'</span><span class="p">,</span> <span class="s1">'depth-camera'</span><span class="p">]</span>
     <span class="n">Location</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Location'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">])</span>
@@ -297,13 +297,13 @@
 <span class="c1"># ==============================================================================</span>
 
 
-<div class="viewcode-block" id="ClientSideBoundingBoxes"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.ClientSideBoundingBoxes">[docs]</a><span class="k">class</span> <span class="nc">ClientSideBoundingBoxes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ClientSideBoundingBoxes"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.ClientSideBoundingBoxes">[docs]</a><span class="k">class</span> <span class="nc">ClientSideBoundingBoxes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    This is a module responsible for creating 3D bounding boxes and drawing them</span>
 <span class="sd">    client-side on pygame surface.</span>
 <span class="sd">    """</span>
 
-<div class="viewcode-block" id="ClientSideBoundingBoxes.make_calibration"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.ClientSideBoundingBoxes.make_calibration">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClientSideBoundingBoxes.make_calibration"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.ClientSideBoundingBoxes.make_calibration">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">make_calibration</span><span class="p">(</span><span class="n">fov</span><span class="p">,</span> <span class="n">size_x</span><span class="p">,</span> <span class="n">size_y</span><span class="p">):</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">size_x</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">fov</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">360.</span><span class="p">))</span>
         <span class="n">cx0</span> <span class="o">=</span> <span class="n">size_x</span> <span class="o">/</span> <span class="mi">2</span>
@@ -312,7 +312,7 @@
                          <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">cy0</span><span class="p">],</span>
                          <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">])</span></div>
 
-<div class="viewcode-block" id="ClientSideBoundingBoxes.get_2d_bbox"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.ClientSideBoundingBoxes.get_2d_bbox">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClientSideBoundingBoxes.get_2d_bbox"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.ClientSideBoundingBoxes.get_2d_bbox">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_2d_bbox</span><span class="p">(</span><span class="n">actor_tracks</span><span class="p">,</span> <span class="n">sensor_location</span><span class="p">,</span> <span class="n">sensor_rotation</span><span class="p">,</span> <span class="n">fov</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">car_location</span><span class="p">,</span> <span class="n">car_rotation</span><span class="p">,</span>
                     <span class="n">coordinate_system</span><span class="o">=</span><span class="s1">'carla'</span><span class="p">,</span> <span class="n">occlusion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># world location and rotaion of the sensor</span>
@@ -346,7 +346,7 @@
                         <span class="n">bb2d</span><span class="p">[</span><span class="n">actor_type</span><span class="p">][</span><span class="n">actor_id</span><span class="p">][</span><span class="s1">'occlusion'</span><span class="p">]</span> <span class="o">=</span> <span class="n">actor_type_tracks</span><span class="p">[</span><span class="n">actor_id</span><span class="p">][</span><span class="s1">'occlusion'</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">bb2d</span></div>
 
-<div class="viewcode-block" id="ClientSideBoundingBoxes.get_transform_matrix"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.ClientSideBoundingBoxes.get_transform_matrix">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClientSideBoundingBoxes.get_transform_matrix"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.ClientSideBoundingBoxes.get_transform_matrix">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_transform_matrix</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">rotation</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Creates matrix from carla transform.</span>
@@ -372,7 +372,7 @@
         <span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_p</span> <span class="o">*</span> <span class="n">c_r</span>
         <span class="k">return</span> <span class="n">matrix</span></div>
 
-<div class="viewcode-block" id="ClientSideBoundingBoxes.get_matrix"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.ClientSideBoundingBoxes.get_matrix">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClientSideBoundingBoxes.get_matrix"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.ClientSideBoundingBoxes.get_matrix">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_matrix</span><span class="p">(</span><span class="n">transform</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Creates matrix from carla transform.</span>
@@ -401,7 +401,7 @@
         <span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_p</span> <span class="o">*</span> <span class="n">c_r</span>
         <span class="k">return</span> <span class="n">matrix</span></div>
 
-<div class="viewcode-block" id="ClientSideBoundingBoxes.draw_bounding_boxes_on_array"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.ClientSideBoundingBoxes.draw_bounding_boxes_on_array">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClientSideBoundingBoxes.draw_bounding_boxes_on_array"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.ClientSideBoundingBoxes.draw_bounding_boxes_on_array">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">draw_bounding_boxes_on_array</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">actor_tracks</span><span class="p">,</span> <span class="n">draw2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">occlusion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Draws bounding boxes on the given image from the camera.</span>
@@ -488,14 +488,14 @@
         <span class="k">return</span> <span class="n">img</span></div></div>
 
 
-<div class="viewcode-block" id="NotSpawnedError"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.NotSpawnedError">[docs]</a><span class="k">class</span> <span class="nc">NotSpawnedError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+<div class="viewcode-block" id="NotSpawnedError"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.NotSpawnedError">[docs]</a><span class="k">class</span> <span class="nc">NotSpawnedError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Indicates an attempt to use a sensor that is not instantiated in any world.</span>
 <span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="Display"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display">[docs]</a><span class="k">class</span> <span class="nc">Display</span><span class="p">:</span>
+<div class="viewcode-block" id="Display"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display">[docs]</a><span class="k">class</span> <span class="nc">Display</span><span class="p">:</span>
     <span class="sd">"""</span>
 <span class="sd">    Base class for displays that does nothing with received image.</span>
 
@@ -508,7 +508,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">feed</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stopped</span> <span class="o">=</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="Display.render"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.render"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Process the provided camera image.</span>
 
@@ -519,7 +519,7 @@
 <span class="sd">        """</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="Display.start"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.start"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Restart the display, reconnecting to last used camera.</span>
 <span class="sd">        """</span>
@@ -532,7 +532,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Display already started"</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Display.stop"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.stop"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Stop the display, remembering the camera connected to</span>
 <span class="sd">        but disconnecting from it.</span>
@@ -544,7 +544,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Display already stopped"</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Display.attach_to"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.attach_to">[docs]</a>    <span class="k">def</span> <span class="nf">attach_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feed</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.attach_to"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.attach_to">[docs]</a>    <span class="k">def</span> <span class="nf">attach_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feed</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Attach to a specific camera.</span>
 
@@ -556,7 +556,7 @@
         <span class="n">feed</span><span class="o">.</span><span class="n">attach_display</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">feed</span> <span class="o">=</span> <span class="n">feed</span></div>
 
-<div class="viewcode-block" id="Display.detach"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.detach">[docs]</a>    <span class="k">def</span> <span class="nf">detach</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.detach"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.detach">[docs]</a>    <span class="k">def</span> <span class="nf">detach</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Detach from the camera and stop displaying.</span>
 <span class="sd">        """</span>
@@ -569,7 +569,7 @@
                 <span class="k">pass</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">feed</span> <span class="o">=</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="Display.resize"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.resize">[docs]</a>    <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">Resolution</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.resize"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.resize">[docs]</a>    <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">Resolution</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Change own resolution and reconnect to the camera,</span>
 <span class="sd">        so it can adjust the images sent.</span>
@@ -585,21 +585,21 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="n">res</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">attach_to</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Display.destroy"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.destroy">[docs]</a>    <span class="k">def</span> <span class="nf">destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.destroy"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.destroy">[docs]</a>    <span class="k">def</span> <span class="nf">destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Disconnect from camera and close self.</span>
 <span class="sd">        Can't be restarted after destroying.</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Display.close"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.close"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Display.intercept_event"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.Display.intercept_event">[docs]</a>    <span class="k">def</span> <span class="nf">intercept_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="Display.intercept_event"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.Display.intercept_event">[docs]</a>    <span class="k">def</span> <span class="nf">intercept_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span></div></div>
 
 
-<div class="viewcode-block" id="SplitScreen"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.SplitScreen">[docs]</a><span class="k">class</span> <span class="nc">SplitScreen</span><span class="p">(</span><span class="n">Display</span><span class="p">):</span>
+<div class="viewcode-block" id="SplitScreen"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.SplitScreen">[docs]</a><span class="k">class</span> <span class="nc">SplitScreen</span><span class="p">(</span><span class="n">Display</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    A split screen display uses a part of a larger display.</span>
 <span class="sd">    Can only be used on displays that allow rendering with offset.</span>
@@ -617,15 +617,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
 
-<div class="viewcode-block" id="SplitScreen.render"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.SplitScreen.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="SplitScreen.render"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.SplitScreen.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SplitScreen.intercept_event"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.SplitScreen.intercept_event">[docs]</a>    <span class="k">def</span> <span class="nf">intercept_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="SplitScreen.intercept_event"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.SplitScreen.intercept_event">[docs]</a>    <span class="k">def</span> <span class="nf">intercept_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">intercept_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="PyGameWindow"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.PyGameWindow">[docs]</a><span class="k">class</span> <span class="nc">PyGameWindow</span><span class="p">(</span><span class="n">Display</span><span class="p">):</span>
+<div class="viewcode-block" id="PyGameWindow"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.PyGameWindow">[docs]</a><span class="k">class</span> <span class="nc">PyGameWindow</span><span class="p">(</span><span class="n">Display</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    PyGame window displayed on the monitor. Using fake display with pygame</span>
 <span class="sd">    will make it invisible. The window is necessary to capture key strokes.</span>
@@ -641,17 +641,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_display</span><span class="p">()</span>
 
-<div class="viewcode-block" id="PyGameWindow.set_display"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.PyGameWindow.set_display">[docs]</a>    <span class="k">def</span> <span class="nf">set_display</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PyGameWindow.set_display"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.PyGameWindow.set_display">[docs]</a>    <span class="k">def</span> <span class="nf">set_display</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullscreen_flags</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullscreen</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_flags</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PyGameWindow.render"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.PyGameWindow.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PyGameWindow.render"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.PyGameWindow.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">display</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">surface</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">surfarray</span><span class="o">.</span><span class="n">make_surface</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PyGameWindow.resize"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.PyGameWindow.resize">[docs]</a>    <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">Resolution</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PyGameWindow.resize"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.PyGameWindow.resize">[docs]</a>    <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">Resolution</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Resize to new resolution. Underlying PyGame implementation is not</span>
 <span class="sd">        very reliable.</span>
@@ -659,7 +659,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_display</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PyGameWindow.intercept_event"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.PyGameWindow.intercept_event">[docs]</a>    <span class="k">def</span> <span class="nf">intercept_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="PyGameWindow.intercept_event"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.PyGameWindow.intercept_event">[docs]</a>    <span class="k">def</span> <span class="nf">intercept_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Intercepts window resizing events.</span>
 <span class="sd">        """</span>
@@ -669,7 +669,7 @@
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="PyGameWindow.split_screen"><a class="viewcode-back" href="../../source/iai_client.html#iai_client.utils.PyGameWindow.split_screen">[docs]</a>    <span class="k">def</span> <span class="nf">split_screen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">Resolution</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SplitScreen</span><span class="p">:</span>
+<div class="viewcode-block" id="PyGameWindow.split_screen"><a class="viewcode-back" href="../../source/invertedai_client.html#invertedai_client.utils.PyGameWindow.split_screen">[docs]</a>    <span class="k">def</span> <span class="nf">split_screen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">Resolution</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SplitScreen</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Create a smaller screen from a part of this one.</span>
 <span class="sd">        """</span>

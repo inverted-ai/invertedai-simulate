@@ -1,7 +1,7 @@
-from iai_client.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
+from invertedai_client.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
 # from iai_client.utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
 # from iai_client.interface import IAIEnv
-from iai_client.interface import IAIEnv
+from invertedai_client.interface import IAIEnv
 from iai_common.communications.utils import SensorSettings
 import numpy as np
 import argparse

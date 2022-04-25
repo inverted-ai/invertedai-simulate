@@ -10,10 +10,10 @@
 
 
 <!-- start quickstart -->
-1. Install iai-client in your project environment.
+1. Install invertedai_client in your project environment.
 
    ```shell
-   pip install iai-client
+   pip install invertedai_client
    ```
 
 2. Alternatively, to run the provided examples build the environment with the packages in the 'requirements.txt'.
@@ -44,5 +44,5 @@ e.g. to publish to testpypi
 
 ### Autodoc  
 Run `make html` inside `docs/` dir will auto generate the html documentation from the current source files.  
-Run `sphinx-apidoc -f -o source/ ../src/iai_client` inside `docs/` dir to regenerate the rst files in `source/`.  
+Run `sphinx-apidoc -f -o source/ ../src/invertedai_client` inside `docs/` dir to regenerate the rst files in `source/`.  
 More info regarding autodoc can be found [here](https://docs-python2readthedocs.readthedocs.io/en/master/code-doc.html#)

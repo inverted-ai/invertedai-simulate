@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>iai_client.dataset.env_dataset - iai-client 1.0.0 documentation</title>
+        <title>invertedai_client.dataset.env_dataset - invertedai-client 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -132,7 +132,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">iai-client 1.0.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">invertedai-client 1.0.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -175,9 +175,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../apireference.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../apireference.html#serialization">Serialization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../miscellaneous.html">Document Title</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/modules.html">iai_client</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../source/iai_client.html">iai_client package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../source/iai_client.dataset.html">iai_client.dataset package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/modules.html">invertedai_client</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../source/invertedai_client.html">invertedai_client package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/invertedai_client.dataset.html">invertedai_client.dataset package</a></li>
 </ul>
 </li>
 </ul>
@@ -214,7 +214,7 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for iai_client.dataset.env_dataset</h1><div class="highlight"><pre>
+          <h1>Source code for invertedai_client.dataset.env_dataset</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span>
 
@@ -228,7 +228,7 @@
 <span class="kn">import</span> <span class="nn">gym</span>
 
 
-<div class="viewcode-block" id="IAIEnvDataset"><a class="viewcode-back" href="../../../source/iai_client.dataset.html#iai_client.dataset.env_dataset.IAIEnvDataset">[docs]</a><span class="k">class</span> <span class="nc">IAIEnvDataset</span><span class="p">(</span><span class="n">IterableDataset</span><span class="p">):</span>
+<div class="viewcode-block" id="IAIEnvDataset"><a class="viewcode-back" href="../../../source/invertedai_client.dataset.html#invertedai_client.dataset.env_dataset.IAIEnvDataset">[docs]</a><span class="k">class</span> <span class="nc">IAIEnvDataset</span><span class="p">(</span><span class="n">IterableDataset</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">world_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vehicle_physics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scenario_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">sensors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">IAIEnv</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -260,7 +260,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set_env_scenario</span><span class="p">(</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">world_parameters</span><span class="p">,</span> <span class="n">vehicle_physics</span><span class="p">,</span> <span class="n">scenario_parameters</span><span class="p">,</span> <span class="n">sensors</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">IAIEnvDataset</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-<div class="viewcode-block" id="IAIEnvDataset.set_env_scenario"><a class="viewcode-back" href="../../../source/iai_client.dataset.html#iai_client.dataset.env_dataset.IAIEnvDataset.set_env_scenario">[docs]</a>    <span class="k">def</span> <span class="nf">set_env_scenario</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">world_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vehicle_physics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scenario_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="IAIEnvDataset.set_env_scenario"><a class="viewcode-back" href="../../../source/invertedai_client.dataset.html#invertedai_client.dataset.env_dataset.IAIEnvDataset.set_env_scenario">[docs]</a>    <span class="k">def</span> <span class="nf">set_env_scenario</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">world_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vehicle_physics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scenario_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="n">sensors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">set_scenario</span><span class="p">(</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">world_parameters</span><span class="p">,</span> <span class="n">vehicle_physics</span><span class="p">,</span> <span class="n">scenario_parameters</span><span class="p">,</span> <span class="n">sensors</span><span class="p">)</span></div>
 
@@ -302,17 +302,17 @@
     <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<div class="viewcode-block" id="IAIEnvDataset.build_data_from_queried_result"><a class="viewcode-back" href="../../../source/iai_client.dataset.html#iai_client.dataset.env_dataset.IAIEnvDataset.build_data_from_queried_result">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="IAIEnvDataset.build_data_from_queried_result"><a class="viewcode-back" href="../../../source/invertedai_client.dataset.html#invertedai_client.dataset.env_dataset.IAIEnvDataset.build_data_from_queried_result">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">build_data_from_queried_result</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="n">obs</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">OBS</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">REWARDS</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">INFO</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">obs</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">obs</span><span class="p">),</span>
                     <span class="n">info</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">obs</span><span class="p">),</span>
                     <span class="n">rewards</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">rewards</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="IAIEnvDataset.close"><a class="viewcode-back" href="../../../source/iai_client.dataset.html#iai_client.dataset.env_dataset.IAIEnvDataset.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IAIEnvDataset.close"><a class="viewcode-back" href="../../../source/invertedai_client.dataset.html#invertedai_client.dataset.env_dataset.IAIEnvDataset.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_close_env</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="IAIEnvDataset.get_next_action"><a class="viewcode-back" href="../../../source/iai_client.dataset.html#iai_client.dataset.env_dataset.IAIEnvDataset.get_next_action">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="IAIEnvDataset.get_next_action"><a class="viewcode-back" href="../../../source/invertedai_client.dataset.html#invertedai_client.dataset.env_dataset.IAIEnvDataset.get_next_action">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_next_action</span><span class="p">(</span><span class="n">info</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">info</span><span class="p">[</span><span class="s1">'expert_action'</span><span class="p">]</span></div>
 
@@ -331,12 +331,12 @@
     <span class="k">def</span> <span class="nf">_seed_env</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
-<div class="viewcode-block" id="IAIEnvDataset.pre_load_data"><a class="viewcode-back" href="../../../source/iai_client.dataset.html#iai_client.dataset.env_dataset.IAIEnvDataset.pre_load_data">[docs]</a>    <span class="k">def</span> <span class="nf">pre_load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IAIEnvDataset.pre_load_data"><a class="viewcode-back" href="../../../source/invertedai_client.dataset.html#invertedai_client.dataset.env_dataset.IAIEnvDataset.pre_load_data">[docs]</a>    <span class="k">def</span> <span class="nf">pre_load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">limit</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">limit</span><span class="p">:</span>
                 <span class="k">break</span></div>
 
-<div class="viewcode-block" id="IAIEnvDataset.add_config"><a class="viewcode-back" href="../../../source/iai_client.dataset.html#iai_client.dataset.env_dataset.IAIEnvDataset.add_config">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="IAIEnvDataset.add_config"><a class="viewcode-back" href="../../../source/invertedai_client.dataset.html#invertedai_client.dataset.env_dataset.IAIEnvDataset.add_config">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">add_config</span><span class="p">(</span><span class="n">parser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">IAIEnv</span><span class="o">.</span><span class="n">add_config</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">'--enable_rendering'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
