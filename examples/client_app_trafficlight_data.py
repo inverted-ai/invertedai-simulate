@@ -1,12 +1,14 @@
 from invertedai_client.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
-# from iai_client.utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
-# from iai_client.interface import IAIEnv
-from invertedai_client.interface import IAIEnv
+from invertedai_client.interface import IAIEnv, ServerTimeoutError
 from iai_common.communications.utils import SensorSettings
 import numpy as np
 import argparse
 import matplotlib.pyplot as plt
 import pygame
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 num_cams = 2
 sensors_dict = {
@@ -28,11 +30,22 @@ config = parser.parse_args()
 world_parameters = dict(carlatown='Town04')
 scenario_parameters = dict(camera_location_variation=SensorSettings.Location(x=1, z=1, y=1),
                            camera_rotation_variation=SensorSettings.Rotation(yaw=10, pitch=10, roll=10))
-env = IAIEnv(config)
-# obs = env.set_scenario('corl2017')
-# obs = env.set_scenario('nocrash', sensors=sensors_dict)
-# obs = env.set_scenario('egodriving', sensors=sensors_dict)
-obs = env.set_scenario('worlddataset', world_parameters=world_parameters, scenario_parameters=scenario_parameters, sensors=sensors_dict)
+server_address = input('Enter server address: ')
+if server_address:
+    config.zmq_server_address = f'{server_address}:5555'
+
+
+obs = None
+while obs is None:
+    env = IAIEnv(config)
+    try:
+        obs = env.set_scenario('worlddataset', world_parameters=world_parameters, scenario_parameters=scenario_parameters, sensors=sensors_dict)
+    except ServerTimeoutError as e:
+        logger.error(f'Server timed out, retrying ...')
+        env.close()
+        continue
+
+
 action = (0.0, 1.0)
 _, reward, done, info = env.step(action)
 # env.visualize_fig(fig)

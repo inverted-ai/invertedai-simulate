@@ -5,12 +5,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import gym
 from halo import Halo
+import timeout_decorator
+
 
 Action = Tuple[float, float]
 Obs = Dict[str, np.ndarray]
 
 
 class ClientHandshakeError(Exception):
+    pass
+
+
+class ServerTimeoutError(Exception):
     pass
 
 
@@ -30,6 +36,7 @@ class IAIEnv(gym.Env):
         self.state = None
         self.obs = None
 
+    @timeout_decorator.timeout(180, timeout_exception=ServerTimeoutError)
     def set_scenario(self, scenario_name, world_parameters=None, vehicle_physics=None, scenario_parameters=None,
                      sensors=None):
         """

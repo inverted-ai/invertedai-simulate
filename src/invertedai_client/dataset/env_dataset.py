@@ -1,14 +1,16 @@
 import time
 from typing import Iterator
-
+import logging
 from torch.utils.data import IterableDataset
 from typing import Dict
 import pickle
 from .db import CacheDataDB
 from .models import DataLoader
-from ..interface import IAIEnv
+from ..interface import IAIEnv, ServerTimeoutError
 import argparse
 import gym
+
+logger = logging.getLogger(__name__)
 
 
 class IAIEnvDataset(IterableDataset):
@@ -39,13 +41,21 @@ class IAIEnvDataset(IterableDataset):
         self.save_to_disk_interval = config.save_to_disk_interval
         self.saved_data = []
         self.last_saved_at = time.time()
-        self._env: IAIEnv = gym.make(config.env_name, config=config) if env is None else env
-        self.set_env_scenario(scenario_name, world_parameters, vehicle_physics, scenario_parameters, sensors)
+        obs = None
+        while obs is None:
+            self._env: IAIEnv = gym.make(config.env_name, config=config) if env is None else env
+            try:
+                obs = self.set_env_scenario(scenario_name, world_parameters, vehicle_physics, scenario_parameters, sensors)
+            except ServerTimeoutError as e:
+                logger.error(f'Server timed out, retrying ...')
+                self._env.close()
+                continue
+
         super(IAIEnvDataset).__init__()
 
     def set_env_scenario(self, scenario_name, world_parameters=None, vehicle_physics=None, scenario_parameters=None,
                          sensors=None):
-        self._env.set_scenario(scenario_name, world_parameters, vehicle_physics, scenario_parameters, sensors)
+        return self._env.set_scenario(scenario_name, world_parameters, vehicle_physics, scenario_parameters, sensors)
 
     def __iter__(self) -> Iterator[Dict]:
         done = False
