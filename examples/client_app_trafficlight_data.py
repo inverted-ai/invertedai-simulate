@@ -6,6 +6,7 @@ from iai_common.communications.utils import SensorSettings
 import numpy as np
 import argparse
 import matplotlib.pyplot as plt
+import imageio
 import pygame
 
 num_cams = 2
@@ -49,6 +50,7 @@ if len(heights) > 0:
     full_res = Resolution(width, height)
     main_display = PyGameWindow(full_res)
 ##
+frames = []
 done = False
 while not done:
     # env.get_map()
@@ -98,20 +100,16 @@ while not done:
                                                                                                                 bb2d,
                                                                                                                 draw2d=False,
                                                                                                                 occlusion=True)
-
-    # if len(heights) > 0:
-    #     bb2d = ClientSideBoundingBoxes.get_2D_bbox(obs['sensor_data']['boundingbox_ego']['bounding_boxes'], None, None, 90.0, Res.MD, None, None, coordinate_system='sensor')
-    #     img = obs['sensor_data']['front-cam']['image']
-    #     obs['sensor_data']['front-cam']['image'] = ClientSideBoundingBoxes.draw_bounding_boxes_on_array(img, bb2d)
-
     if len(heights) > 0:
         disp_img = np.concatenate(list(
             obs['sensor_data'][name]['image'] for name in sensors_dict if 'image' in obs['sensor_data'][name].keys()),
                                   axis=1)
         main_display.render(disp_img)
         pygame.display.update()
+        frames.append(disp_img.astype(np.uint8))
 #
-
+file_name= 'script_data_video.mp4'
+imageio.mimwrite(file_name, frames, fps=30, quality=7)
 print(f'Episode Done, Reward:{reward}')
 # env.get_map()
 ##

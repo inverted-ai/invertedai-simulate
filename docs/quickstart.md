@@ -1,4 +1,9 @@
 # Quickstart
+```{include} ../README.md
+:start-after: <!-- start quickstart --> 
+:end-before: <!-- end quickstart -->
+```
+
 1. Install iai-client in your project environment.
 
    ```shell
