@@ -19,7 +19,10 @@ Breaking Down Barriers to Level 4-5 Autonomy
 
 ```{toctree}
 :hidden:
+:maxdepth: 4
+
 quickstart
+introduction
 getstarted
 guides
 
@@ -28,6 +31,7 @@ guides
 ```{toctree}
 :caption: Development
 :hidden:
+:maxdepth: 2
 
 apireference
 miscellaneous
