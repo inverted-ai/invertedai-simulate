@@ -1,10 +1,13 @@
-from iai_client.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
-from iai_client.interface import IAIEnv
+from invertedai_simulate.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
+from invertedai_simulate.interface import IAIEnv, ServerTimeoutError
 from iai_common.communications.utils import SensorSettings
+import logging
 import numpy as np
 import argparse
 import matplotlib.pyplot as plt
 import pygame
+
+logger = logging.getLogger(__name__)
 
 sensors_dict = {
         # 'top-cam': {
@@ -98,13 +101,15 @@ IAIEnv.add_config(parser)
 config = parser.parse_args()
 # world_parameters = dict(carlatown='Town01')
 world_parameters = dict(carlatown='Town04')
-# config.zmq_server_address = "35.87.251.46:5555"
+server_address = input('Enter server address: ')
+if server_address:
+    config.zmq_server_address = f'{server_address}:5555'
+
+
 env = IAIEnv(config)
-
-# --zmq_server_address '35.87.251.46:5555'
-# server_address = "tcp://35.87.251.46:5555"
-
 obs = env.set_scenario('egodriving', world_parameters=world_parameters, sensors=sensors_dict)
+
+
 action = (0.0, 1.0)
 _, reward, done, info = env.step(action)
 # env.visualize_fig(fig)

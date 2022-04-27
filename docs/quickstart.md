@@ -1,8 +1,8 @@
 # Quickstart
-1. Install iai-client in your project environment.
+1. Install invertedai_simulate in your project environment.
 
    ```shell
-   pip install iai-client
+   pip install invertedai_simulate
    ```
 
 2. Alternatively, to run the provided examples build the environment with the packages in the 'requirements.txt'.

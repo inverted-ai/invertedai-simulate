@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../src'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'iai-client'
+project = 'invertedai-simulate'
 copyright = '2022, InvertedAI'
 author = 'InvertedAI'
 
