@@ -28,6 +28,7 @@ class IAIEnv(gym.Env):
         self.zmq_server_address = f"tcp://{config.zmq_server_address}"
         self.client_id = config.client_id
         self.remote = ApiMessagingClient(self.zmq_server_address, self.client_id)
+        self.enable_progress_spinner = config.enable_progress_spinner
         for i in range(config.num_handshake_tries):
             if self.remote.client_handshake():
                 break
@@ -54,11 +55,9 @@ class IAIEnv(gym.Env):
         :return:
         :rtype:
         """
-        spinner = Halo(text=f'Loading: {scenario_name} scenario', spinner='dots')
-        spinner.start()
-        self.remote.initialize(scenario_name, world_parameters, vehicle_physics, scenario_parameters, sensors)
-        _, message = self.remote.get_reply()
-        spinner.succeed()
+        with Halo(text=f'Loading: {scenario_name} scenario', spinner='dots', enabled=self.enable_progress_spinner):
+            self.remote.initialize(scenario_name, world_parameters, vehicle_physics, scenario_parameters, sensors)
+            _, message = self.remote.get_reply()
         return message
 
     def get_map(self):
@@ -143,6 +142,7 @@ class IAIEnv(gym.Env):
         parser.add_argument('--num_handshake_tries', type=int, default=10)
         parser.add_argument('--zmq_server_address', type=str, default='localhost:5555')
         parser.add_argument('--client_id', type=str, default='0')
+        parser.add_argument('--enable_progress_spinner', type=int, default=1)
 
 
 gym.register('iai/GenericEnv-v0', entry_point=IAIEnv)
