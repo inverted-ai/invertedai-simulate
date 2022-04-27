@@ -1,3 +1,5 @@
+[![Documentation Status](https://readthedocs.org/projects/invertedai-simulate/badge/?version=latest)](https://invertedai-simulate.readthedocs.io/en/latest/?badge=latest)
+
 #   Product Interface Client
 
 <!-- start elevator-pitch -->
