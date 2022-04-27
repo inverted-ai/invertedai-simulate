@@ -1,7 +1,7 @@
-invertedai_client
-=================
+invertedai_simulate
+===================
 
 .. toctree::
    :maxdepth: 4
 
-   invertedai_client
+   invertedai_simulate

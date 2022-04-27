@@ -1,5 +1,5 @@
-from invertedai_client.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
-from invertedai_client.interface import IAIEnv, ServerTimeoutError
+from invertedai_simulate.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
+from invertedai_simulate.interface import IAIEnv, ServerTimeoutError
 from iai_common.communications.utils import SensorSettings
 import numpy as np
 import argparse
@@ -35,15 +35,8 @@ if server_address:
     config.zmq_server_address = f'{server_address}:5555'
 
 
-obs = None
-while obs is None:
-    env = IAIEnv(config)
-    try:
-        obs = env.set_scenario('worlddataset', world_parameters=world_parameters, scenario_parameters=scenario_parameters, sensors=sensors_dict)
-    except ServerTimeoutError as e:
-        logger.error(f'Server timed out, retrying ...')
-        env.close()
-        continue
+env = IAIEnv(config)
+obs = env.set_scenario('worlddataset', world_parameters=world_parameters, scenario_parameters=scenario_parameters, sensors=sensors_dict)
 
 
 action = (0.0, 1.0)
