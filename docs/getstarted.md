@@ -1,7 +1,7 @@
 # Getting Started
 
 ## IAI-Powered Carla SimaaS: 
-
+Inverted-AI client [package](https://pypi.org/project/iai-client/)
 
 ## Models
 

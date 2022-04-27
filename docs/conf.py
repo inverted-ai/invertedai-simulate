@@ -47,7 +47,7 @@ extensions = [
     "sphinx_design",
     "sphinx_inline_tabs",
     # Notebook
-    # "nbsphinx" Not working
+    # "nbsphinx", # Not working
 ]
 templates_path = ["_templates"]
 

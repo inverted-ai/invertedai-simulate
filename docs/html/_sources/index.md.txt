@@ -33,6 +33,7 @@ guides
 :hidden:
 :maxdepth: 2
 
+examples
 apireference
 miscellaneous
 source/modules
