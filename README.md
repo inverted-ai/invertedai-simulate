@@ -35,6 +35,3 @@
    ```
 
 <!-- end quickstart -->
-
-### Building
-`python -m build`
