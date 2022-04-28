@@ -4,7 +4,12 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 import gym
-from halo import Halo
+import __main__ as main
+if not  hasattr(main, '__file__'):
+    from halo import HaloNotebook as Halo
+else:
+    from halo import Halo
+
 
 
 Action = Tuple[float, float]
