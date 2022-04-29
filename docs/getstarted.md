@@ -1,13 +1,9 @@
-# Introduction
-## Overview
-
-## Key concepts
+# Getting Started
+---
+IAI-Powered Carla SimaaS: 
+Inverted-AI client [package](https://pypi.org/project/iai-client/)
 
 ## Models
-
-
-
-## Introduction
 
 ## Start with an instruction
 
