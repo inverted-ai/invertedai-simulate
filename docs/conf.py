@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 
 # -- Project information -----------------------------------------------------
@@ -22,7 +22,7 @@ copyright = '2022, InvertedAI'
 author = 'InvertedAI'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = '1.0.3'
 
 
 # -- General configuration ---------------------------------------------------
@@ -45,7 +45,7 @@ extensions = [
     "myst_parser",
     "sphinx_copybutton",
     "sphinx_design",
-    "sphinx_inline_tabs",
+    # "sphinx_inline_tabs",
     # Notebook
     # "nbsphinx", # Not working
 ]
