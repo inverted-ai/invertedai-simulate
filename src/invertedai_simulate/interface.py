@@ -1,15 +1,22 @@
 from .zmq_client import ApiMessagingClient
+from .utils import Resolution, PyGameWindow
 from typing import Dict, Tuple, Any
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 import gym
+import pygame
+import cv2
+try:
+  import google.colab
+  IN_COLAB = True
+except:
+  IN_COLAB = False
 import __main__ as main
-if not  hasattr(main, '__file__'):
-    from halo import HaloNotebook as Halo
-else:
+if IN_COLAB or hasattr(main, '__file__'):
     from halo import Halo
-
+else:
+    from halo import HaloNotebook as Halo
 
 
 Action = Tuple[float, float]
@@ -40,6 +47,7 @@ class IAIEnv(gym.Env):
             raise ClientHandshakeError
         self.state = None
         self.obs = None
+        self.gygamewindow = None
 
     def set_scenario(self, scenario_name, world_parameters=None, vehicle_physics=None, scenario_parameters=None,
                      sensors=None):
@@ -58,6 +66,7 @@ class IAIEnv(gym.Env):
         :return:
         :rtype:
         """
+        self.sensors_dict = sensors
         with Halo(text=f'Loading: {scenario_name} scenario', spinner='dots', enabled=self.enable_progress_spinner):
             self.remote.initialize(scenario_name, world_parameters, vehicle_physics, scenario_parameters, sensors)
             _, message = self.remote.get_reply()
@@ -98,8 +107,38 @@ class IAIEnv(gym.Env):
         plt.show()
         plt.pause(0.001)
 
-    def render(self, mode="human"):
-        pass
+
+    def render_init(self, sensors_dict, renderer='pygame', scale=1, notebook_display=None, notebook_image=None):
+        self.scale = scale
+        self.renderer = renderer
+        self.render_sensors = sensors_dict
+        if renderer == 'notebook':
+            assert notebook_display is not None
+            assert notebook_image is not None
+            self.display_handle = notebook_display(None, display_id=True)
+            self.notebook_image = notebook_image
+        elif renderer == 'pygame':
+            width = np.sum([sensors_dict[sns]['resolution'].width*scale for sns in sensors_dict if sensors_dict[sns]['sensor_type']=='camera'])
+            height = np.max([sensors_dict[sns]['resolution'].height*scale for sns in sensors_dict if sensors_dict[sns]['sensor_type']=='camera'])
+            full_res = Resolution(width, height)
+            pygame.init()
+            self.gygamewindow = PyGameWindow(full_res)
+
+    def render(self):
+        sensors_dict = self.render_sensors
+        disp_img = np.concatenate(list(cv2.resize(self.obs['sensor_data'][name]['image'], None, fx=self.scale, fy=self.scale, interpolation=cv2.INTER_AREA) for name in sensors_dict if 'image' in self.obs['sensor_data'][name].keys()), axis=1)
+        if self.renderer == 'notebook':
+            _, frame = cv2.imencode('.jpeg', disp_img)
+            self.display_handle.update(self.notebook_image(data=frame.tobytes()))
+            # self.display_handle.update(disp_img)
+        elif self.renderer == 'pygame':
+            self.gygamewindow.render(disp_img)
+            pygame.display.update()
+        else:
+            frame = disp_img
+            cv2.imshow('Sensors', frame)
+            c = cv2.waitKey(1)
+
 
     def step(self, action: Action) -> Tuple[object, float, bool, dict]:
         """
@@ -112,11 +151,11 @@ class IAIEnv(gym.Env):
         """
         self.remote.send_command("step", {'step': action})
         _, message = self.remote.get_reply()
-        obs = message['obs']
-        reward = message['reward']
-        done = message['done']
-        info = message['info']
-        return obs, reward, done, info
+        self.obs = message['obs']
+        self.reward = message['reward']
+        self.done = message['done']
+        self.info = message['info']
+        return self.obs, self.reward, self.done, self.info
 
     def get_reward(self) -> float:
         return self.state['reward']
