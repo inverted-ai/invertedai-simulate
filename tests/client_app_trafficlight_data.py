@@ -12,8 +12,8 @@ if answers['source'] == 'Local Source':
     module_path = os.path.abspath(os.path.join('..'))
     if module_path not in sys.path:
         sys.path.append(module_path)
-    from src.invertedai_simulate.utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
-    from src.invertedai_simulate.interface import IAIEnv, ServerTimeoutError
+    from invertedai_simulate.utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
+    from invertedai_simulate.interface import IAIEnv, ServerTimeoutError
 else:
     from iai_client.utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
     from iai_client.interface import IAIEnv
