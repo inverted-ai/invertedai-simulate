@@ -20,8 +20,7 @@
 
 2. Alternatively, build the environment with the packages in the 'requirements.txt'.
    ```shell
-   pip install -r requirements.txt
-   source .venv/bin/activate
+   poetry install --no-dev
    ```
 4. Run your simulation! 🎉
 - For driving run:
