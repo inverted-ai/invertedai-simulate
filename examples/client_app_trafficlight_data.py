@@ -1,5 +1,3 @@
-from invertedai_simulate.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
-from invertedai_simulate.interface import IAIEnv, ServerTimeoutError
 from iai_common.communications.utils import SensorSettings
 import numpy as np
 import argparse
@@ -7,9 +5,42 @@ import matplotlib.pyplot as plt
 import imageio
 import pygame
 import logging
-
-
+import inquirer
 logger = logging.getLogger(__name__)
+questions = [
+    inquirer.List('source',
+                message="Which InvertedAI-Simulate?",
+                choices=['Cloned Repository', 'Installed Pypi Package'],
+            ),
+    inquirer.List('remote_host',
+                message="Remote Server?",
+                choices=["yes", "no"], default="no"
+                  ),
+    inquirer.Text('server_ip',
+                message="Server ip address?",
+                  ),
+    inquirer.Text('port',
+                  message="Server Port", default="5555",
+            )
+]
+answers = inquirer.prompt(questions[:2])
+if answers['remote_host'] == 'no':
+    server_address='localhost'
+    server_port='5555'
+else:
+    ip_answer = inquirer.prompt(questions[2:])
+    server_address = ip_answer['server_ip']
+    server_port = ip_answer['port']
+    print(f'{server_address}:{server_port}')
+
+if answers['source'] == 'Cloned Repository':
+    import sys
+    sys.path.append('../invertedai_simulate')
+    from utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
+    from interface import IAIEnv, ServerTimeoutError
+else:
+    from invertedai_simulate.utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
+    from invertedai_simulate.interface import IAIEnv
 
 num_cams = 2
 sensors_dict = {
@@ -31,10 +62,8 @@ config = parser.parse_args()
 world_parameters = dict(carlatown='Town04')
 scenario_parameters = dict(camera_location_variation=SensorSettings.Location(x=1, z=1, y=1),
                            camera_rotation_variation=SensorSettings.Rotation(yaw=10, pitch=10, roll=10))
-server_address = input('Enter server address: ')
 if server_address:
-    config.zmq_server_address = f'{server_address}:5555'
-
+    config.zmq_server_address = f'{server_address}:{server_port}'
 
 env = IAIEnv(config)
 obs = env.set_scenario('worlddataset', world_parameters=world_parameters, scenario_parameters=scenario_parameters, sensors=sensors_dict)
@@ -46,16 +75,7 @@ _, reward, done, info = env.step(action)
 rem_self = 0
 how_long = 0
 
-pygame.init()
-
-widths = [sensors_dict[sns]['resolution'].width for sns in sensors_dict if 'resolution' in sensors_dict[sns].keys()]
-heights = [sensors_dict[sns]['resolution'].height for sns in sensors_dict if 'resolution' in sensors_dict[sns].keys()]
-if len(heights) > 0:
-    width = np.sum(widths)
-    height = np.max(heights)
-    full_res = Resolution(width, height)
-    main_display = PyGameWindow(full_res)
-##
+env.render_init(sensors_dict, renderer='pygame', scale=.5)
 frames = []
 done = False
 while not done:
@@ -81,7 +101,6 @@ while not done:
             print(message)
         elif cmd == 'init':
             obs = env.set_scenario('worlddataset', world_parameters=world_parameters, scenario_parameters=scenario_parameters, sensors=sensors_dict)
-            # obs = env.set_scenario('worlddataset', world_parameters=world_parameters, sensors=sensors_dict)
         elif cmd == 'end':
             print(env.end_simulation())
             env.close()
@@ -90,9 +109,7 @@ while not done:
             angle = float(cmd)
             acceleration = float(input('Enter Acceleration:'))
             action = (acceleration, angle)
-            # action = int(input('Enter Action:'))
             obs, reward, done, info = env.step(action)
-    # env.render(fig)
     for attached_sensor in sensors_dict:
         name = 'boundingbox_' + attached_sensor
         if (name in obs['sensor_data']):
@@ -106,16 +123,10 @@ while not done:
                                                                                                                 bb2d,
                                                                                                                 draw2d=False,
                                                                                                                 occlusion=True)
-    if len(heights) > 0:
-        disp_img = np.concatenate(list(
-            obs['sensor_data'][name]['image'] for name in sensors_dict if 'image' in obs['sensor_data'][name].keys()),
-                                  axis=1)
-        main_display.render(disp_img)
-        pygame.display.update()
-        frames.append(disp_img.astype(np.uint8))
-#
-file_name= 'script_data_video.mp4'
-imageio.mimwrite(file_name, frames, fps=30, quality=7)
+    frame = env.render()
+    frames.append(frame)
 print(f'Episode Done, Reward:{reward}')
+# file_name= 'script_sensor_video.mp4'
+# imageio.mimwrite(file_name, frames, fps=15, quality=7)
 # env.get_map()
 ##

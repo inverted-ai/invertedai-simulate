@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "invertedai-simulate"
-version = "1.0.3"
+version = "1.0.4"
 description = "Client Interface for InvertedAI Simulate"
 authors = ["Inverted AI <info@inverted.ai>"]
 classifiers = [
@@ -37,6 +37,7 @@ sphinxcontrib-htmlhelp = { version = "==2.0.0", optional = false }
 sphinxcontrib-jsmath = { version = "==1.0.1", optional = false }
 sphinxcontrib-qthelp = { version = "==1.0.3", optional = false }
 sphinxcontrib-serializinghtml = { version = "==1.1.5", optional = false }
+inquirer = "^2.9.2"
 
 [tool.poetry.dev-dependencies]
 twine = "==4.0.0"
