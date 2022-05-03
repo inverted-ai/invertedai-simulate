@@ -1,5 +1,3 @@
-from invertedai_simulate.utils import Res, Resolution, PyGameWindow, ClientSideBoundingBoxes
-from invertedai_simulate.interface import IAIEnv, ServerTimeoutError
 from iai_common.communications.utils import SensorSettings
 import logging
 import numpy as np
@@ -7,8 +5,46 @@ import argparse
 import matplotlib.pyplot as plt
 import pygame
 import imageio
+import inquirer
+import cv2
+
+cap = cv2.VideoCapture(0)
 
 logger = logging.getLogger(__name__)
+questions = [
+    inquirer.List('source',
+                message="Which InvertedAI-Simulate?",
+                choices=['Cloned Repository', 'Latest Published Pypi Package'],
+            ),
+    inquirer.List('remote_host',
+                message="Remote Host?",
+                choices=["yes", "no"], default="no"
+                  ),
+    inquirer.Text('server_ip',
+                message="Server ip address?",
+                  ),
+    inquirer.Text('port',
+                  message="Server Port", default="5555",
+            )
+]
+answers = inquirer.prompt(questions[:2])
+if answers['remote_host'] == 'no':
+    server_address='localhost'
+    server_port='5555'
+else:
+    ip_answer = inquirer.prompt(questions[2:])
+    server_address = ip_answer['server_ip']
+    server_port = ip_answer['port']
+    print(f'{server_address}:{server_port}')
+
+if answers['source'] == 'Cloned Repository':
+    import sys
+    sys.path.append('../invertedai_simulate')
+    from utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
+    from interface import IAIEnv, ServerTimeoutError
+else:
+    from invertedai_simulate.utils import Res, SensorSettings, Resolution, PyGameWindow, ClientSideBoundingBoxes
+    from invertedai_simulate.interface import IAIEnv
 
 sensors_dict = {
         # 'top-cam': {
@@ -37,13 +73,13 @@ sensors_dict = {
             'rotation': SensorSettings.Rotation(yaw=0, roll=0, pitch=0),
             'fov': 90.0,
             },
-        'boundingbox_ego': {
-            'sensor_type': 'boundingbox',
-            'track_actor_types': SensorSettings.Available_Tracked_Actors,  # or 'all'
-            'world_sensor': False, # if True returns the coordinates in the global frame of reference
-            'attach_to_actor': 'ego',
-            'radius': 20,
-            },
+        # 'boundingbox_ego': {
+        #     'sensor_type': 'boundingbox',
+        #     'track_actor_types': SensorSettings.Available_Tracked_Actors,  # or 'all'
+        #     'world_sensor': False, # if True returns the coordinates in the global frame of reference
+        #     'attach_to_actor': 'ego',
+        #     'radius': 20,
+        #     },
         'boundingbox_cam': {
             'sensor_type': 'boundingbox',
             'track_actor_types': SensorSettings.Available_Tracked_Actors,  # or 'all'
@@ -64,35 +100,35 @@ sensors_dict = {
             'rotation': SensorSettings.Rotation(yaw=90, roll=0, pitch=0),
             'fov': 90.0,
             },
-        'boundingbox_side_cam': {
-            'sensor_type': 'boundingbox',
-            'track_actor_types': SensorSettings.Available_Tracked_Actors,  # or 'all'
-            'world_sensor': False, # if True returns the coordinates in the global frame of reference
-            'attach_to_actor': 'side-cam',
-            'radius': 20,
-            'occlusion': True,
-            },
-        'back-cam':{
-            'sensor_type': 'camera',
-            'camera_type': 'rgb-camera',
-            'bounding_box': False,
-            # 'track_actor_types': 'all', #Actors, # or 'all'
-            'track_actor_types': SensorSettings.Available_Tracked_Actors,
-            'show_bounding_boxes': False,
-            'world_sensor': False,
-            'resolution': Res.SD,
-            'location': SensorSettings.Location(x=0, z=2.8, y=0),
-            'rotation': SensorSettings.Rotation(yaw=180, roll=0, pitch=0),
-            'fov': 90.0,
-            },
-        'boundingbox_back_cam': {
-            'sensor_type': 'boundingbox',
-            'track_actor_types': SensorSettings.Available_Tracked_Actors,  # or 'all'
-            'world_sensor': False, # if True returns the coordinates in the global frame of reference
-            'attach_to_actor': 'back-cam',
-            'radius': 20,
-            'occlusion': True,
-            },
+        # 'boundingbox_side_cam': {
+        #     'sensor_type': 'boundingbox',
+        #     'track_actor_types': SensorSettings.Available_Tracked_Actors,  # or 'all'
+        #     'world_sensor': False, # if True returns the coordinates in the global frame of reference
+        #     'attach_to_actor': 'side-cam',
+        #     'radius': 20,
+        #     'occlusion': True,
+        #     },
+        # 'back-cam':{
+        #     'sensor_type': 'camera',
+        #     'camera_type': 'rgb-camera',
+        #     'bounding_box': False,
+        #     # 'track_actor_types': 'all', #Actors, # or 'all'
+        #     'track_actor_types': SensorSettings.Available_Tracked_Actors,
+        #     'show_bounding_boxes': False,
+        #     'world_sensor': False,
+        #     'resolution': Res.SD,
+        #     'location': SensorSettings.Location(x=0, z=2.8, y=0),
+        #     'rotation': SensorSettings.Rotation(yaw=180, roll=0, pitch=0),
+        #     'fov': 90.0,
+        #     },
+        # 'boundingbox_back_cam': {
+        #     'sensor_type': 'boundingbox',
+        #     'track_actor_types': SensorSettings.Available_Tracked_Actors,  # or 'all'
+        #     'world_sensor': False, # if True returns the coordinates in the global frame of reference
+        #     'attach_to_actor': 'back-cam',
+        #     'radius': 20,
+        #     'occlusion': True,
+        #     },
 }
 
 
@@ -100,12 +136,10 @@ fig = plt.figure()
 parser = argparse.ArgumentParser()
 IAIEnv.add_config(parser)
 config = parser.parse_args()
-# world_parameters = dict(carlatown='Town01')
-world_parameters = dict(carlatown='Town04')
-server_address = input('Enter server address: ')
+world_parameters = dict(carlatown='Town01')
+# world_parameters = dict(carlatown='Town04')
 if server_address:
-    config.zmq_server_address = f'{server_address}:5555'
-
+    config.zmq_server_address = f'{server_address}:{server_port}'
 
 env = IAIEnv(config)
 obs = env.set_scenario('egodriving', world_parameters=world_parameters, sensors=sensors_dict)
@@ -113,20 +147,11 @@ obs = env.set_scenario('egodriving', world_parameters=world_parameters, sensors=
 
 action = (0.0, 1.0)
 _, reward, done, info = env.step(action)
-# env.visualize_fig(fig)
 rem_self = 0
 how_long = 0
 
-pygame.init()
-
-widths = [sensors_dict[sns]['resolution'].width for sns in sensors_dict if 'resolution' in sensors_dict[sns].keys()]
-heights = [sensors_dict[sns]['resolution'].height for sns in sensors_dict if 'resolution' in sensors_dict[sns].keys()]
-if len(heights) > 0:
-    width = np.sum(widths)
-    height = np.max(heights)
-    full_res = Resolution(width, height)
-    main_display = PyGameWindow(full_res)
-##
+env.render_init(sensors_dict, renderer='pygame', scale=.5)
+# env.render_init(sensors_dict, renderer='cv', scale=.5)
 frames = []
 done = False
 while not done:
@@ -162,7 +187,6 @@ while not done:
             action = (acceleration, angle)
         # action = int(input('Enter Action:'))
             obs, reward, done, info = env.step(action)
-    # env.render(fig)
 
     for name in sensors_dict:
         if (sensors_dict[name]['sensor_type'] == 'boundingbox'):
@@ -172,12 +196,10 @@ while not done:
                 img = obs['sensor_data'][attached_sensor]['image']
                 obs['sensor_data'][attached_sensor]['image'] = ClientSideBoundingBoxes.draw_bounding_boxes_on_array(img, bb2d, draw2d=True, occlusion=True)
 
-    if len(heights) > 0:
-        disp_img = np.concatenate(list(obs['sensor_data'][name]['image'] for name in sensors_dict if 'image' in obs['sensor_data'][name].keys()), axis=1)
-        main_display.render(disp_img)
-        pygame.display.update()
-        frames.append(disp_img.astype(np.uint8))
-#
-file_name= 'script_sensor_video.mp4'
-imageio.mimwrite(file_name, frames, fps=30, quality=7)
+
+    frames.append(env.render())
+
+
 print(f'Episode Done, Reward:{reward}')
+# file_name= 'script_sensor_video.mp4'
+# imageio.mimwrite(file_name, frames, fps=15, quality=7)

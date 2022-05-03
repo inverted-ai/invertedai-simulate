@@ -20,8 +20,7 @@
 
 2. Alternatively, build the environment with the packages in the 'requirements.txt'.
    ```shell
-   pip install -r requirements.txt
-   source .venv/bin/activate
+   poetry install --no-dev
    ```
 4. Run your simulation! 🎉
 - For driving run:
@@ -43,6 +42,3 @@
 - For data generation as a pytorch dataloader:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/inverted-ai/iai-client/blob/main/examples/demo-dataloader.ipynb)
 <!-- end quickstart -->
-
-### Building
-`python -m build`
