@@ -3,7 +3,7 @@ name = "alabaster"
 version = "0.7.12"
 description = "A configurable sidebar-enabled Sphinx theme"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -11,7 +11,7 @@ name = "babel"
 version = "2.10.1"
 description = "Internationalization utilities"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
@@ -22,7 +22,7 @@ name = "beautifulsoup4"
 version = "4.11.1"
 description = "Screen-scraping library"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6.0"
 
 [package.dependencies]
@@ -175,7 +175,7 @@ name = "furo"
 version = "2022.4.7"
 description = "A clean customisable Sphinx documentation theme."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
@@ -268,7 +268,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "imageio"
-version = "2.18.0"
+version = "2.19.0"
 description = "Library for reading and writing a wide range of image, video, scientific, and volumetric data formats."
 category = "main"
 optional = false
@@ -279,17 +279,18 @@ numpy = "*"
 pillow = ">=8.3.2"
 
 [package.extras]
-all-plugins = ["astropy", "av", "imageio-ffmpeg", "psutil", "tifffile"]
+all-plugins = ["astropy", "av", "imageio-ffmpeg", "opencv-python", "psutil", "tifffile"]
 all-plugins-pypy = ["av", "imageio-ffmpeg", "psutil", "tifffile"]
 build = ["wheel"]
 dev = ["invoke", "pytest", "pytest-cov", "fsspec", "black", "flake8"]
 docs = ["sphinx", "numpydoc", "pydata-sphinx-theme"]
 ffmpeg = ["imageio-ffmpeg", "psutil"]
 fits = ["astropy"]
-full = ["astropy", "av", "black", "flake8", "fsspec", "gdal", "imageio-ffmpeg", "invoke", "itk", "numpydoc", "psutil", "pydata-sphinx-theme", "pytest", "pytest-cov", "sphinx", "tifffile", "wheel"]
+full = ["astropy", "av", "black", "flake8", "fsspec", "gdal", "imageio-ffmpeg", "invoke", "itk", "numpydoc", "opencv-python", "psutil", "pydata-sphinx-theme", "pytest", "pytest-cov", "sphinx", "tifffile", "wheel"]
 gdal = ["gdal"]
 itk = ["itk"]
 linting = ["black", "flake8"]
+opencv = ["opencv-python"]
 pyav = ["av"]
 test = ["invoke", "pytest", "pytest-cov", "fsspec"]
 tifffile = ["tifffile"]
@@ -307,7 +308,7 @@ name = "imagesize"
 version = "1.3.0"
 description = "Getting image size from png/jpeg/jpeg2000/gif file"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
@@ -344,7 +345,7 @@ name = "jinja2"
 version = "3.1.2"
 description = "A very fast and expressive template engine."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
@@ -398,7 +399,7 @@ name = "markdown-it-py"
 version = "2.1.0"
 description = "Python port of markdown-it. Markdown parsing, done right!"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
@@ -420,7 +421,7 @@ name = "markupsafe"
 version = "2.1.1"
 description = "Safely add untrusted strings to HTML/XML markup."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [[package]]
@@ -447,7 +448,7 @@ name = "mdit-py-plugins"
 version = "0.3.0"
 description = "Collection of plugins for markdown-it-py"
 category = "main"
-optional = true
+optional = false
 python-versions = "~=3.6"
 
 [package.dependencies]
@@ -463,7 +464,7 @@ name = "mdurl"
 version = "0.1.1"
 description = "Markdown URL utilities"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [[package]]
@@ -471,7 +472,7 @@ name = "myst-parser"
 version = "0.17.2"
 description = "An extended commonmark compliant parser, with bridges to docutils & sphinx."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
@@ -621,7 +622,7 @@ name = "pytz"
 version = "2022.1"
 description = "World timezone definitions, modern and historical"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -648,7 +649,7 @@ name = "pyyaml"
 version = "6.0"
 description = "YAML parser and emitter for Python"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [[package]]
@@ -811,7 +812,7 @@ name = "snowballstemmer"
 version = "2.2.0"
 description = "This package provides 29 stemmers for 28 languages generated from Snowball algorithms."
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [[package]]
@@ -819,7 +820,7 @@ name = "soupsieve"
 version = "2.3.2.post1"
 description = "A modern CSS selector implementation for Beautiful Soup."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [[package]]
@@ -827,7 +828,7 @@ name = "sphinx"
 version = "4.5.0"
 description = "Python documentation generator"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
@@ -859,7 +860,7 @@ name = "sphinx-copybutton"
 version = "0.5.0"
 description = "Add a copy button to each of your code cells."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
@@ -874,7 +875,7 @@ name = "sphinx-design"
 version = "0.1.0"
 description = "A sphinx extension for designing beautiful, view size responsive web components."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
@@ -894,7 +895,7 @@ name = "sphinx-rtd-theme"
 version = "1.0.0"
 description = "Read the Docs theme for Sphinx"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
 
 [package.dependencies]
@@ -909,7 +910,7 @@ name = "sphinxcontrib-applehelp"
 version = "1.0.2"
 description = "sphinxcontrib-applehelp is a sphinx extension which outputs Apple help books"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.5"
 
 [package.extras]
@@ -921,7 +922,7 @@ name = "sphinxcontrib-devhelp"
 version = "1.0.2"
 description = "sphinxcontrib-devhelp is a sphinx extension which outputs Devhelp document."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.5"
 
 [package.extras]
@@ -933,7 +934,7 @@ name = "sphinxcontrib-htmlhelp"
 version = "2.0.0"
 description = "sphinxcontrib-htmlhelp is a sphinx extension which renders HTML help files"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.extras]
@@ -945,7 +946,7 @@ name = "sphinxcontrib-jsmath"
 version = "1.0.1"
 description = "A sphinx extension which renders display math in HTML via JavaScript"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.5"
 
 [package.extras]
@@ -956,7 +957,7 @@ name = "sphinxcontrib-qthelp"
 version = "1.0.3"
 description = "sphinxcontrib-qthelp is a sphinx extension which outputs QtHelp document."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.5"
 
 [package.extras]
@@ -968,7 +969,7 @@ name = "sphinxcontrib-serializinghtml"
 version = "1.1.5"
 description = "sphinxcontrib-serializinghtml is a sphinx extension which outputs \"serialized\" HTML files (json and pickle)."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.5"
 
 [package.extras]
@@ -1117,13 +1118,10 @@ python-versions = ">=3.7"
 docs = ["sphinx", "jaraco.packaging (>=9)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)"]
 
-[extras]
-docs = ["Sphinx", "sphinx-rtd-theme", "sphinx-copybutton", "sphinx-design", "furo", "myst-parser"]
-
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7.1, <3.11"
-content-hash = "ee77323250d7f76916114eabd0d1074ca64f1847076e7a19b43e38119d2a07e0"
+content-hash = "399e89332c01c5a891908ebb16f42e18315eaca3e0ba579ac0c0521450660f25"
 
 [metadata.files]
 alabaster = [
@@ -1335,8 +1333,8 @@ idna = [
     {file = "idna-3.3.tar.gz", hash = "sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"},
 ]
 imageio = [
-    {file = "imageio-2.18.0-py3-none-any.whl", hash = "sha256:a922cb37011d69702edbb4f68b0475d8f7242337e7995a42b7c32ec9931ddd46"},
-    {file = "imageio-2.18.0.tar.gz", hash = "sha256:090898c48532631ab11c74ae743e64c24dabda45c16db46f7e3bec9e2d8f422f"},
+    {file = "imageio-2.19.0-py3-none-any.whl", hash = "sha256:7e803cd50a6b271e96e18f14767f8c2e01f27b84f93768cf9f08ad5277e9d030"},
+    {file = "imageio-2.19.0.tar.gz", hash = "sha256:cd8c946ecdf71f2fc74419b2e3c97a46104e91c2d2c4288d3217eae366778638"},
 ]
 imageio-ffmpeg = [
     {file = "imageio-ffmpeg-0.4.7.tar.gz", hash = "sha256:7a08838f97f363e37ca41821b864fd3fdc99ab1fe2421040c78eb5f56a9e723e"},
@@ -1563,21 +1561,18 @@ packaging = [
 pillow = [
     {file = "Pillow-9.1.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:af79d3fde1fc2e33561166d62e3b63f0cc3e47b5a3a2e5fea40d4917754734ea"},
     {file = "Pillow-9.1.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:55dd1cf09a1fd7c7b78425967aacae9b0d70125f7d3ab973fadc7b5abc3de652"},
-    {file = "Pillow-9.1.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:66822d01e82506a19407d1afc104c3fcea3b81d5eb11485e593ad6b8492f995a"},
     {file = "Pillow-9.1.0-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a5eaf3b42df2bcda61c53a742ee2c6e63f777d0e085bbc6b2ab7ed57deb13db7"},
     {file = "Pillow-9.1.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:01ce45deec9df310cbbee11104bae1a2a43308dd9c317f99235b6d3080ddd66e"},
     {file = "Pillow-9.1.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:aea7ce61328e15943d7b9eaca87e81f7c62ff90f669116f857262e9da4057ba3"},
     {file = "Pillow-9.1.0-cp310-cp310-win32.whl", hash = "sha256:7a053bd4d65a3294b153bdd7724dce864a1d548416a5ef61f6d03bf149205160"},
     {file = "Pillow-9.1.0-cp310-cp310-win_amd64.whl", hash = "sha256:97bda660702a856c2c9e12ec26fc6d187631ddfd896ff685814ab21ef0597033"},
     {file = "Pillow-9.1.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:21dee8466b42912335151d24c1665fcf44dc2ee47e021d233a40c3ca5adae59c"},
-    {file = "Pillow-9.1.0-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6b6d4050b208c8ff886fd3db6690bf04f9a48749d78b41b7a5bf24c236ab0165"},
     {file = "Pillow-9.1.0-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:5cfca31ab4c13552a0f354c87fbd7f162a4fafd25e6b521bba93a57fe6a3700a"},
     {file = "Pillow-9.1.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ed742214068efa95e9844c2d9129e209ed63f61baa4d54dbf4cf8b5e2d30ccf2"},
     {file = "Pillow-9.1.0-cp37-cp37m-win32.whl", hash = "sha256:c9efef876c21788366ea1f50ecb39d5d6f65febe25ad1d4c0b8dff98843ac244"},
     {file = "Pillow-9.1.0-cp37-cp37m-win_amd64.whl", hash = "sha256:de344bcf6e2463bb25179d74d6e7989e375f906bcec8cb86edb8b12acbc7dfef"},
     {file = "Pillow-9.1.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:17869489de2fce6c36690a0c721bd3db176194af5f39249c1ac56d0bb0fcc512"},
     {file = "Pillow-9.1.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:25023a6209a4d7c42154073144608c9a71d3512b648a2f5d4465182cb93d3477"},
-    {file = "Pillow-9.1.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:8782189c796eff29dbb37dd87afa4ad4d40fc90b2742704f94812851b725964b"},
     {file = "Pillow-9.1.0-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:463acf531f5d0925ca55904fa668bb3461c3ef6bc779e1d6d8a488092bdee378"},
     {file = "Pillow-9.1.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3f42364485bfdab19c1373b5cd62f7c5ab7cc052e19644862ec8f15bb8af289e"},
     {file = "Pillow-9.1.0-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:3fddcdb619ba04491e8f771636583a7cc5a5051cd193ff1aa1ee8616d2a692c5"},
@@ -1585,7 +1580,6 @@ pillow = [
     {file = "Pillow-9.1.0-cp38-cp38-win_amd64.whl", hash = "sha256:c24f718f9dd73bb2b31a6201e6db5ea4a61fdd1d1c200f43ee585fc6dcd21b34"},
     {file = "Pillow-9.1.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:fb89397013cf302f282f0fc998bb7abf11d49dcff72c8ecb320f76ea6e2c5717"},
     {file = "Pillow-9.1.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:c870193cce4b76713a2b29be5d8327c8ccbe0d4a49bc22968aa1e680930f5581"},
-    {file = "Pillow-9.1.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:69e5ddc609230d4408277af135c5b5c8fe7a54b2bdb8ad7c5100b86b3aab04c6"},
     {file = "Pillow-9.1.0-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:35be4a9f65441d9982240e6966c1eaa1c654c4e5e931eaf580130409e31804d4"},
     {file = "Pillow-9.1.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:82283af99c1c3a5ba1da44c67296d5aad19f11c535b551a5ae55328a317ce331"},
     {file = "Pillow-9.1.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:a325ac71914c5c043fa50441b36606e64a10cd262de12f7a179620f579752ff8"},

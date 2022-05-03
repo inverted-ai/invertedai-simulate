@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 questions = [
     inquirer.List('source',
                 message="Which InvertedAI-Simulate?",
-                choices=['Cloned Repository', 'Latest Published Pypi Package'],
+                choices=['Cloned Repository', 'Installed Pypi Package'],
             ),
     inquirer.List('remote_host',
                 message="Remote Server?",
