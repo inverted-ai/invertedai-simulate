@@ -45,9 +45,17 @@ class IAIEnv(gym.Env):
                 break
         else:
             raise ClientHandshakeError
-        self.state = None
+        self.done = None
+        self.info = None
+        self.reward = None
         self.obs = None
-        self.gygamewindow = None
+        self.pygame_window = None
+        self.sensors_dict = None
+        self.scale = None
+        self.renderer = None
+        self.render_sensors = None
+        self.display_handle = None
+        self.notebook_image = None
 
     def set_scenario(self, scenario_name, world_parameters=None, vehicle_physics=None, scenario_parameters=None,
                      sensors=None):
@@ -122,7 +130,7 @@ class IAIEnv(gym.Env):
             height = np.max([sensors_dict[sns]['resolution'].height*scale for sns in sensors_dict if sensors_dict[sns]['sensor_type']=='camera'])
             full_res = Resolution(width, height)
             pygame.init()
-            self.gygamewindow = PyGameWindow(full_res)
+            self.pygame_window = PyGameWindow(full_res)
 
 
     def render(self, show=True):
@@ -136,7 +144,7 @@ class IAIEnv(gym.Env):
               self.display_handle.update(self.notebook_image(data=frame.tobytes()))
               # self.display_handle.update(disp_img)
           elif self.renderer == 'pygame':
-              self.gygamewindow.render(disp_img)
+              self.pygame_window.render(disp_img)
               pygame.display.update()
           else:
               frame = disp_img
@@ -161,15 +169,6 @@ class IAIEnv(gym.Env):
         self.done = message['done']
         self.info = message['info']
         return self.obs, self.reward, self.done, self.info
-
-    def get_reward(self) -> float:
-        return self.state['reward']
-
-    def get_done(self) -> bool:
-        return self.state['done']
-
-    def get_info(self) -> Dict[str, Any]:
-        return self.state['info']
 
     def close(self):
         self.remote.close()
