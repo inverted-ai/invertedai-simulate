@@ -22,7 +22,7 @@ matplotlib = "==3.5.1"
 pyzmq = "==22.3.0"
 scikit-image = "==0.19.2"
 SQLAlchemy = "==1.4.31"
-iai_common = "==1.0.1"
+iai_common = "==1.0.2"
 halo = "==0.0.31"
 imageio-ffmpeg = "^0.4.7"
 Sphinx = { version = "==4.5.0", optional = false }
