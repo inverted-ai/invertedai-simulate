@@ -59,15 +59,15 @@ action = (0.0, 1.0)
 rem_self = 0
 how_long = 0
 
-env.render_init(sensors_dict, renderer='pygame', scale=.5)
+env.render_init(sensors_dict, renderer='pygame', scale=1)
 frames = []
 done = False
 
 # CARLA_WEATHERS = ['ClearNoon', 'SoftRainNoon', 'HardRainNoon','ClearSunset', 'WetCloudySunset', 'SoftRainSunset', 'Random']
 env_settings = [{'carlatown':'Town01', 'traffic_count':0, 'pedestrian_count':0, 'weather':'ClearNoon'},
-    {'carlatown':'Town01', 'traffic_count':100, 'pedestrian_count':0, 'weather':'WetCloudySunset' },
-    {'carlatown':'Town01', 'traffic_count':0, 'pedestrian_count':10, 'weather':'ClearSunset' },
-    {'carlatown':'Town01', 'traffic_count':20, 'pedestrian_count':10, 'weather':'HardRainNoon' },
+                {'carlatown':'Town01', 'traffic_count':100, 'pedestrian_count':0, 'weather':'WetCloudySunset' },
+                {'carlatown':'Town01', 'traffic_count':0, 'pedestrian_count':10, 'weather':'ClearSunset' },
+                {'carlatown':'Town01', 'traffic_count':20, 'pedestrian_count':10, 'weather':'HardRainNoon' },
 ]
 for l, confs in enumerate(env_settings):
     print(f'Start Env:{l}::\ncarlatown:{confs["carlatown"]}, traffic_count:{confs["traffic_count"]}, pedestrian_count:{confs["pedestrian_count"]}, weather:{confs["weather"]}')
