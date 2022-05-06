@@ -136,7 +136,7 @@ fig = plt.figure()
 parser = argparse.ArgumentParser()
 IAIEnv.add_config(parser)
 config = parser.parse_args()
-world_parameters = dict(carlatown='Town01')
+world_parameters = dict(carlatown='Town01', traffic_count=0, pedestrian_count=0)
 # world_parameters = dict(carlatown='Town04')
 if server_address:
     config.zmq_server_address = f'{server_address}:{server_port}'
