@@ -148,6 +148,7 @@ class IAIEnv(gym.Env):
               pygame.display.update()
           else:
               frame = disp_img
+              frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
               cv2.imshow('Sensors', frame)
               c = cv2.waitKey(1)
       return disp_img
