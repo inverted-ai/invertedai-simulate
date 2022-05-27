@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "invertedai-simulate"
-version = "1.0.5"
+version = "1.0.6.dev"
 description = "Client Interface for InvertedAI Simulate"
 authors = ["Inverted AI <info@inverted.ai>"]
 classifiers = [
